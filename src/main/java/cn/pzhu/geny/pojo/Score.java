@@ -4,25 +4,25 @@ import java.io.Serializable;
 import lombok.Data;
 
 /**
- * major
+ * score
  * @author 
  */
 @Data
-public class Major implements Serializable {
+public class Score implements Serializable {
     /**
-     * 专业编号
+     * 活动id
      */
-    private Integer majorId;
+    private Integer actId;
 
     /**
-     * 专业名
+     * 参与人号码
      */
-    private String majorName;
+    private Integer userNo;
 
     /**
-     * 专业归属学院
+     * 得分情况
      */
-    private Integer majorDeptNo;
+    private Integer score;
 
     private static final long serialVersionUID = 1L;
 }

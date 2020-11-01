@@ -3,13 +3,13 @@ package cn.pzhu.geny.mapper;
 import cn.pzhu.geny.pojo.Major;
 
 public interface MajorMapper {
-    int deleteByPrimaryKey(Integer actId);
+    int deleteByPrimaryKey(Integer majorId);
 
     int insert(Major record);
 
     int insertSelective(Major record);
 
-    Major selectByPrimaryKey(Integer actId);
+    Major selectByPrimaryKey(Integer majorId);
 
     int updateByPrimaryKeySelective(Major record);
 

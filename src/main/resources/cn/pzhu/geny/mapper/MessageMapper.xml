@@ -2,116 +2,86 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.pzhu.geny.mapper.MessageMapper">
   <resultMap id="BaseResultMap" type="cn.pzhu.geny.pojo.Message">
-    <id column="act_id" jdbcType="INTEGER" property="actId" />
-    <result column="act_name" jdbcType="VARCHAR" property="actName" />
-    <result column="act_descr" jdbcType="VARCHAR" property="actDescr" />
-    <result column="act_start" jdbcType="DATE" property="actStart" />
-    <result column="act_end" jdbcType="DATE" property="actEnd" />
-    <result column="act_score" jdbcType="FLOAT" property="actScore" />
-    <result column="act_tea_no" jdbcType="INTEGER" property="actTeaNo" />
+    <id column="message_id" jdbcType="INTEGER" property="messageId" />
+    <result column="user_no" jdbcType="INTEGER" property="userNo" />
+    <result column="to_user_no" jdbcType="INTEGER" property="toUserNo" />
+    <result column="message" jdbcType="VARCHAR" property="message" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    act_id, act_name, act_descr, act_start, act_end, act_score, act_tea_no
+    message_id, user_no, to_user_no, message, create_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from activity
-    where act_id = #{actId,jdbcType=INTEGER}
+    from message
+    where message_id = #{messageId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from activity
-    where act_id = #{actId,jdbcType=INTEGER}
+    delete from message
+    where message_id = #{messageId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="cn.pzhu.geny.pojo.Message">
-    insert into activity (act_id, act_name, act_descr, 
-      act_start, act_end, act_score, 
-      act_tea_no)
-    values (#{actId,jdbcType=INTEGER}, #{actName,jdbcType=VARCHAR}, #{actDescr,jdbcType=VARCHAR}, 
-      #{actStart,jdbcType=DATE}, #{actEnd,jdbcType=DATE}, #{actScore,jdbcType=FLOAT}, 
-      #{actTeaNo,jdbcType=INTEGER})
+  <insert id="insert" keyColumn="message_id" keyProperty="messageId" parameterType="cn.pzhu.geny.pojo.Message" useGeneratedKeys="true">
+    insert into message (user_no, to_user_no, message, 
+      create_time)
+    values (#{userNo,jdbcType=INTEGER}, #{toUserNo,jdbcType=INTEGER}, #{message,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="cn.pzhu.geny.pojo.Message">
-    insert into activity
+  <insert id="insertSelective" keyColumn="message_id" keyProperty="messageId" parameterType="cn.pzhu.geny.pojo.Message" useGeneratedKeys="true">
+    insert into message
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="actId != null">
-        act_id,
+      <if test="userNo != null">
+        user_no,
       </if>
-      <if test="actName != null">
-        act_name,
+      <if test="toUserNo != null">
+        to_user_no,
       </if>
-      <if test="actDescr != null">
-        act_descr,
+      <if test="message != null">
+        message,
       </if>
-      <if test="actStart != null">
-        act_start,
-      </if>
-      <if test="actEnd != null">
-        act_end,
-      </if>
-      <if test="actScore != null">
-        act_score,
-      </if>
-      <if test="actTeaNo != null">
-        act_tea_no,
+      <if test="createTime != null">
+        create_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="actId != null">
-        #{actId,jdbcType=INTEGER},
+      <if test="userNo != null">
+        #{userNo,jdbcType=INTEGER},
       </if>
-      <if test="actName != null">
-        #{actName,jdbcType=VARCHAR},
+      <if test="toUserNo != null">
+        #{toUserNo,jdbcType=INTEGER},
       </if>
-      <if test="actDescr != null">
-        #{actDescr,jdbcType=VARCHAR},
+      <if test="message != null">
+        #{message,jdbcType=VARCHAR},
       </if>
-      <if test="actStart != null">
-        #{actStart,jdbcType=DATE},
-      </if>
-      <if test="actEnd != null">
-        #{actEnd,jdbcType=DATE},
-      </if>
-      <if test="actScore != null">
-        #{actScore,jdbcType=FLOAT},
-      </if>
-      <if test="actTeaNo != null">
-        #{actTeaNo,jdbcType=INTEGER},
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="cn.pzhu.geny.pojo.Message">
-    update activity
+    update message
     <set>
-      <if test="actName != null">
-        act_name = #{actName,jdbcType=VARCHAR},
+      <if test="userNo != null">
+        user_no = #{userNo,jdbcType=INTEGER},
       </if>
-      <if test="actDescr != null">
-        act_descr = #{actDescr,jdbcType=VARCHAR},
+      <if test="toUserNo != null">
+        to_user_no = #{toUserNo,jdbcType=INTEGER},
       </if>
-      <if test="actStart != null">
-        act_start = #{actStart,jdbcType=DATE},
+      <if test="message != null">
+        message = #{message,jdbcType=VARCHAR},
       </if>
-      <if test="actEnd != null">
-        act_end = #{actEnd,jdbcType=DATE},
-      </if>
-      <if test="actScore != null">
-        act_score = #{actScore,jdbcType=FLOAT},
-      </if>
-      <if test="actTeaNo != null">
-        act_tea_no = #{actTeaNo,jdbcType=INTEGER},
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where act_id = #{actId,jdbcType=INTEGER}
+    where message_id = #{messageId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.pzhu.geny.pojo.Message">
-    update activity
-    set act_name = #{actName,jdbcType=VARCHAR},
-      act_descr = #{actDescr,jdbcType=VARCHAR},
-      act_start = #{actStart,jdbcType=DATE},
-      act_end = #{actEnd,jdbcType=DATE},
-      act_score = #{actScore,jdbcType=FLOAT},
-      act_tea_no = #{actTeaNo,jdbcType=INTEGER}
-    where act_id = #{actId,jdbcType=INTEGER}
+    update message
+    set user_no = #{userNo,jdbcType=INTEGER},
+      to_user_no = #{toUserNo,jdbcType=INTEGER},
+      message = #{message,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where message_id = #{messageId,jdbcType=INTEGER}
   </update>
 </mapper>

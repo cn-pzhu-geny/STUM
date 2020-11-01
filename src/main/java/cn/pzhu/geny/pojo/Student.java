@@ -1,49 +1,43 @@
 package cn.pzhu.geny.pojo;
 
 import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
 
 /**
- * activity
+ * student
  * @author 
  */
 @Data
 public class Student implements Serializable {
     /**
-     * 活动编号
+     * 学号
      */
-    private Integer actId;
+    private Integer stuNo;
 
     /**
-     * 活动名称
+     * 唯一身份符
      */
-    private String actName;
+    private String stuId;
 
     /**
-     * 活动内容描述
+     * 姓名
      */
-    private String actDescr;
+    private String stuName;
 
     /**
-     * 开始时间
+     * 性别
      */
-    private Date actStart;
+    private String stuSex;
 
     /**
-     * 截至时间
+     * 联系方式
      */
-    private Date actEnd;
+    private String stuContact;
 
     /**
-     * 活动分数
+     * 班级
      */
-    private Double actScore;
-
-    /**
-     * 活动管理教师
-     */
-    private Integer actTeaNo;
+    private String stuClass;
 
     private static final long serialVersionUID = 1L;
 }

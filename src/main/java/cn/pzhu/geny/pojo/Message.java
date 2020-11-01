@@ -5,45 +5,35 @@ import java.util.Date;
 import lombok.Data;
 
 /**
- * activity
+ * message
  * @author 
  */
 @Data
 public class Message implements Serializable {
     /**
-     * 活动编号
+     * 消息编号
      */
-    private Integer actId;
+    private Integer messageId;
 
     /**
-     * 活动名称
+     * 发送用户
      */
-    private String actName;
+    private Integer userNo;
 
     /**
-     * 活动内容描述
+     * 接受用户
      */
-    private String actDescr;
+    private Integer toUserNo;
 
     /**
-     * 开始时间
+     * 信息内容
      */
-    private Date actStart;
+    private String message;
 
     /**
-     * 截至时间
+     * 发送时间
      */
-    private Date actEnd;
-
-    /**
-     * 活动分数
-     */
-    private Double actScore;
-
-    /**
-     * 活动管理教师
-     */
-    private Integer actTeaNo;
+    private Date createTime;
 
     private static final long serialVersionUID = 1L;
 }

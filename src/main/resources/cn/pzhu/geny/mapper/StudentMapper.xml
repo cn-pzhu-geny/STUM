@@ -2,116 +2,97 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.pzhu.geny.mapper.StudentMapper">
   <resultMap id="BaseResultMap" type="cn.pzhu.geny.pojo.Student">
-    <id column="act_id" jdbcType="INTEGER" property="actId" />
-    <result column="act_name" jdbcType="VARCHAR" property="actName" />
-    <result column="act_descr" jdbcType="VARCHAR" property="actDescr" />
-    <result column="act_start" jdbcType="DATE" property="actStart" />
-    <result column="act_end" jdbcType="DATE" property="actEnd" />
-    <result column="act_score" jdbcType="FLOAT" property="actScore" />
-    <result column="act_tea_no" jdbcType="INTEGER" property="actTeaNo" />
+    <id column="stu_no" jdbcType="INTEGER" property="stuNo" />
+    <result column="stu_id" jdbcType="VARCHAR" property="stuId" />
+    <result column="stu_name" jdbcType="VARCHAR" property="stuName" />
+    <result column="stu_sex" jdbcType="CHAR" property="stuSex" />
+    <result column="stu_contact" jdbcType="VARCHAR" property="stuContact" />
+    <result column="stu_class" jdbcType="VARCHAR" property="stuClass" />
   </resultMap>
   <sql id="Base_Column_List">
-    act_id, act_name, act_descr, act_start, act_end, act_score, act_tea_no
+    stu_no, stu_id, stu_name, stu_sex, stu_contact, stu_class
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from activity
-    where act_id = #{actId,jdbcType=INTEGER}
+    from student
+    where stu_no = #{stuNo,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from activity
-    where act_id = #{actId,jdbcType=INTEGER}
+    delete from student
+    where stu_no = #{stuNo,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="cn.pzhu.geny.pojo.Student">
-    insert into activity (act_id, act_name, act_descr, 
-      act_start, act_end, act_score, 
-      act_tea_no)
-    values (#{actId,jdbcType=INTEGER}, #{actName,jdbcType=VARCHAR}, #{actDescr,jdbcType=VARCHAR}, 
-      #{actStart,jdbcType=DATE}, #{actEnd,jdbcType=DATE}, #{actScore,jdbcType=FLOAT}, 
-      #{actTeaNo,jdbcType=INTEGER})
+  <insert id="insert" keyColumn="stu_no" keyProperty="stuNo" parameterType="cn.pzhu.geny.pojo.Student" useGeneratedKeys="true">
+    insert into student (stu_id, stu_name, stu_sex, 
+      stu_contact, stu_class)
+    values (#{stuId,jdbcType=VARCHAR}, #{stuName,jdbcType=VARCHAR}, #{stuSex,jdbcType=CHAR}, 
+      #{stuContact,jdbcType=VARCHAR}, #{stuClass,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="cn.pzhu.geny.pojo.Student">
-    insert into activity
+  <insert id="insertSelective" keyColumn="stu_no" keyProperty="stuNo" parameterType="cn.pzhu.geny.pojo.Student" useGeneratedKeys="true">
+    insert into student
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="actId != null">
-        act_id,
+      <if test="stuId != null">
+        stu_id,
       </if>
-      <if test="actName != null">
-        act_name,
+      <if test="stuName != null">
+        stu_name,
       </if>
-      <if test="actDescr != null">
-        act_descr,
+      <if test="stuSex != null">
+        stu_sex,
       </if>
-      <if test="actStart != null">
-        act_start,
+      <if test="stuContact != null">
+        stu_contact,
       </if>
-      <if test="actEnd != null">
-        act_end,
-      </if>
-      <if test="actScore != null">
-        act_score,
-      </if>
-      <if test="actTeaNo != null">
-        act_tea_no,
+      <if test="stuClass != null">
+        stu_class,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="actId != null">
-        #{actId,jdbcType=INTEGER},
+      <if test="stuId != null">
+        #{stuId,jdbcType=VARCHAR},
       </if>
-      <if test="actName != null">
-        #{actName,jdbcType=VARCHAR},
+      <if test="stuName != null">
+        #{stuName,jdbcType=VARCHAR},
       </if>
-      <if test="actDescr != null">
-        #{actDescr,jdbcType=VARCHAR},
+      <if test="stuSex != null">
+        #{stuSex,jdbcType=CHAR},
       </if>
-      <if test="actStart != null">
-        #{actStart,jdbcType=DATE},
+      <if test="stuContact != null">
+        #{stuContact,jdbcType=VARCHAR},
       </if>
-      <if test="actEnd != null">
-        #{actEnd,jdbcType=DATE},
-      </if>
-      <if test="actScore != null">
-        #{actScore,jdbcType=FLOAT},
-      </if>
-      <if test="actTeaNo != null">
-        #{actTeaNo,jdbcType=INTEGER},
+      <if test="stuClass != null">
+        #{stuClass,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="cn.pzhu.geny.pojo.Student">
-    update activity
+    update student
     <set>
-      <if test="actName != null">
-        act_name = #{actName,jdbcType=VARCHAR},
+      <if test="stuId != null">
+        stu_id = #{stuId,jdbcType=VARCHAR},
       </if>
-      <if test="actDescr != null">
-        act_descr = #{actDescr,jdbcType=VARCHAR},
+      <if test="stuName != null">
+        stu_name = #{stuName,jdbcType=VARCHAR},
       </if>
-      <if test="actStart != null">
-        act_start = #{actStart,jdbcType=DATE},
+      <if test="stuSex != null">
+        stu_sex = #{stuSex,jdbcType=CHAR},
       </if>
-      <if test="actEnd != null">
-        act_end = #{actEnd,jdbcType=DATE},
+      <if test="stuContact != null">
+        stu_contact = #{stuContact,jdbcType=VARCHAR},
       </if>
-      <if test="actScore != null">
-        act_score = #{actScore,jdbcType=FLOAT},
-      </if>
-      <if test="actTeaNo != null">
-        act_tea_no = #{actTeaNo,jdbcType=INTEGER},
+      <if test="stuClass != null">
+        stu_class = #{stuClass,jdbcType=VARCHAR},
       </if>
     </set>
-    where act_id = #{actId,jdbcType=INTEGER}
+    where stu_no = #{stuNo,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.pzhu.geny.pojo.Student">
-    update activity
-    set act_name = #{actName,jdbcType=VARCHAR},
-      act_descr = #{actDescr,jdbcType=VARCHAR},
-      act_start = #{actStart,jdbcType=DATE},
-      act_end = #{actEnd,jdbcType=DATE},
-      act_score = #{actScore,jdbcType=FLOAT},
-      act_tea_no = #{actTeaNo,jdbcType=INTEGER}
-    where act_id = #{actId,jdbcType=INTEGER}
+    update student
+    set stu_id = #{stuId,jdbcType=VARCHAR},
+      stu_name = #{stuName,jdbcType=VARCHAR},
+      stu_sex = #{stuSex,jdbcType=CHAR},
+      stu_contact = #{stuContact,jdbcType=VARCHAR},
+      stu_class = #{stuClass,jdbcType=VARCHAR}
+    where stu_no = #{stuNo,jdbcType=INTEGER}
   </update>
 </mapper>
