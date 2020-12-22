@@ -23,9 +23,9 @@
     where stu_no = #{stuNo,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="stu_no" keyProperty="stuNo" parameterType="cn.pzhu.geny.pojo.Student" useGeneratedKeys="true">
-    insert into student (stu_id, stu_name, stu_sex, 
+    insert into student (stu_no,stu_id, stu_name, stu_sex,
       stu_contact, stu_class)
-    values (#{stuId,jdbcType=VARCHAR}, #{stuName,jdbcType=VARCHAR}, #{stuSex,jdbcType=CHAR}, 
+    values (#{stuNo},#{stuId,jdbcType=VARCHAR}, #{stuName,jdbcType=VARCHAR}, #{stuSex,jdbcType=CHAR},
       #{stuContact,jdbcType=VARCHAR}, #{stuClass,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="stu_no" keyProperty="stuNo" parameterType="cn.pzhu.geny.pojo.Student" useGeneratedKeys="true">

@@ -2,6 +2,8 @@ package cn.pzhu.geny.mapper;
 
 import cn.pzhu.geny.pojo.Student;
 
+import java.util.List;
+
 public interface StudentMapper {
     int deleteByPrimaryKey(Integer stuNo);
 
@@ -14,4 +16,5 @@ public interface StudentMapper {
     int updateByPrimaryKeySelective(Student record);
 
     int updateByPrimaryKey(Student record);
+
 }

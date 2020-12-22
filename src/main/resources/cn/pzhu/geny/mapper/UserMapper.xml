@@ -6,26 +6,44 @@
     <result column="user_password" jdbcType="VARCHAR" property="userPassword" />
     <result column="permission" jdbcType="INTEGER" property="permission" />
     <result column="head_path" jdbcType="VARCHAR" property="headPath" />
+    <association property="student" javaType="cn.pzhu.geny.pojo.Student">
+      <id property="stuNo" column="stuNo"></id>
+    </association>
+      <association property="teacher" javaType="cn.pzhu.geny.pojo.Teacher">
+        <id property="teaNo" column="teaNo"></id>
+      </association>
+    <association property="enterprise" javaType="cn.pzhu.geny.pojo.Enterprise">
+      <id property="entNo" column="entNo"></id>
+    </association>
   </resultMap>
   <sql id="Base_Column_List">
     user_no, user_password, permission, head_path
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from user
-    where user_no = #{userNo,jdbcType=INTEGER}
+  <select id="selectByNopwd"  resultMap="BaseResultMap">
+    select * from [user]
+    where user_no = #{userNo} and user_password=#{password}
   </select>
+  <select id="selectByNo" resultMap="BaseResultMap">
+     select u.*,s.stu_no from student s,[user] u where u.user_no=s.stu_no and u.user_no=#{stuNo}
+  </select>
+  <select id="selectByNo1" resultType="cn.pzhu.geny.pojo.User">
+    select u.*,t.tec_no from teacher t,[user] u where u.user_no=t.tec_no and u.user_no=#{stuNo}
+  </select>
+
+  <select id="selectByNo2" resultType="cn.pzhu.geny.pojo.User">
+    select e.*,t.tec_no from enterprise e,[user] u where u.user_no=e.ent_no and u.user_no=#{stuNo}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user
     where user_no = #{userNo,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" keyColumn="user_no" keyProperty="userNo" parameterType="cn.pzhu.geny.pojo.User" useGeneratedKeys="true">
-    insert into user (user_password, permission, head_path
-      )
-    values (#{userPassword,jdbcType=VARCHAR}, #{permission,jdbcType=INTEGER}, #{headPath,jdbcType=VARCHAR}
-      )
+    insert into [user] (user_no,user_password, permission, head_path)
+    values (#{userNo},#{userPassword}, #{permission}, #{headPath})
   </insert>
+
   <insert id="insertSelective" keyColumn="user_no" keyProperty="userNo" parameterType="cn.pzhu.geny.pojo.User" useGeneratedKeys="true">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -66,11 +84,11 @@
     </set>
     where user_no = #{userNo,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.pzhu.geny.pojo.User">
+<!--  <update id="updateByPrimaryKey" parameterType="cn.pzhu.geny.pojo.User">
     update user
     set user_password = #{userPassword,jdbcType=VARCHAR},
       permission = #{permission,jdbcType=INTEGER},
       head_path = #{headPath,jdbcType=VARCHAR}
     where user_no = #{userNo,jdbcType=INTEGER}
-  </update>
+  </update>-->
 </mapper>

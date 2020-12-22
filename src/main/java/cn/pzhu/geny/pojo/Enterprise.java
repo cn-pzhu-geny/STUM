@@ -19,5 +19,29 @@ public class Enterprise implements Serializable {
      */
     private String entName;
 
+    public Integer getEntNo() {
+        return entNo;
+    }
+
+    public void setEntNo(Integer entNo) {
+        this.entNo = entNo;
+    }
+
+    public String getEntName() {
+        return entName;
+    }
+
+    public void setEntName(String entName) {
+        this.entName = entName;
+    }
+
+    @Override
+    public String toString() {
+        return "Enterprise{" +
+                "entNo=" + entNo +
+                ", entName='" + entName + '\'' +
+                '}';
+    }
+
     private static final long serialVersionUID = 1L;
 }

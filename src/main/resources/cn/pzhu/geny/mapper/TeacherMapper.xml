@@ -22,9 +22,9 @@
     where tea_no = #{teaNo,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="tea_no" keyProperty="teaNo" parameterType="cn.pzhu.geny.pojo.Teacher" useGeneratedKeys="true">
-    insert into teacher (tea_id, tea_name, tea_sex, 
+    insert into teacher (tea_no ,tea_id, tea_name, tea_sex,
       tea_contact)
-    values (#{teaId,jdbcType=VARCHAR}, #{teaName,jdbcType=VARCHAR}, #{teaSex,jdbcType=VARCHAR}, 
+    values (#{teaNo},#{teaId,jdbcType=VARCHAR}, #{teaName,jdbcType=VARCHAR}, #{teaSex,jdbcType=VARCHAR},
       #{teaContact,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="tea_no" keyProperty="teaNo" parameterType="cn.pzhu.geny.pojo.Teacher" useGeneratedKeys="true">
