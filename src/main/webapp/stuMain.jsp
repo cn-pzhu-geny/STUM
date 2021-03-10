@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="en">
   <head>
@@ -9,10 +10,10 @@
     <title>Jumbotron Template · Bootstrap</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/jumbotron/">
-
+    <link href="customCSS/album.css" rel="stylesheet">
     <!-- Bootstrap core CSS -->
-<link href="css/bootstrap.css" rel="stylesheet">
-
+  <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="customCSS/carousel.css" rel="stylesheet">
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -30,7 +31,7 @@
       }
     </style>
     <!-- Custom styles for this template -->
-    <link href="jumbotron.css" rel="stylesheet">
+    <link href="customCSS/jumbotron.css" rel="stylesheet">
   </head>
   <body>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -58,7 +59,7 @@
         <a class="nav-link" href="#">个人信息管理</a>
       </li>
     </ul>
-      <a class="btn btn-outline-success my-2 my-sm-0" href="#">退出登录</a>
+      <a class="btn btn-outline-success my-2 my-sm-0" href="/">退出登录</a>
   </div>
 </nav>
 
@@ -71,7 +72,7 @@
     </ol>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="images/saad-chaudhry-G25LeMV7fAw-unsplash.jpg">
+        <img src="images/welcome/saad-chaudhry-G25LeMV7fAw-unsplash.jpg">
         <div class="container">
           <div class="carousel-caption text-left">
             <h1>Example headline.</h1>
@@ -81,7 +82,7 @@
         </div>
       </div>
       <div class="carousel-item">
-        <img src="images/kristina-manchenko-9m91N6lLfhE-unsplash.jpg">
+        <img src="images/welcome/kristina-manchenko-9m91N6lLfhE-unsplash.jpg">
         <div class="container">
           <div class="carousel-caption">
             <h1>Another example headline.</h1>
@@ -91,7 +92,7 @@
         </div>
       </div>
       <div class="carousel-item">
-        <img src="images/jake-green-pxfeIzHuMfo-unsplash.jpg">
+        <img src="images/welcome/jake-green-pxfeIzHuMfo-unsplash.jpg">
         <div class="container">
           <div class="carousel-caption text-right">
             <h1>One more for good measure.</h1>
@@ -109,6 +110,58 @@
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="sr-only">Next</span>
     </a>
+  </div>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="images/ch.png" />
+            <div class="card-body">
+              <p class="card-text">圣诞特惠！！！</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">了解更多</button>
+                </div>
+                <small class="text-muted">9 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="images/tec.png" />
+            <div class="card-body">
+              <p class="card-text">新世代，大智造</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">了解更多</button>
+                </div>
+                <small class="text-muted">9 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="images/tec.png" />
+            <div class="card-body">
+              <p class="card-text">新世代，大智造<0/p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">了解更多</button>
+                </div>
+                <small class="text-muted">9 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </main>
 

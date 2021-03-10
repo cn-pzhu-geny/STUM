@@ -13,21 +13,27 @@ import javax.annotation.Resources;
 public class UserServiceImpl  implements UserService {
     @Autowired
     private  UserMapper userMapper;
+    @Override
     public int deleteByPrimaryKey(Integer userNo) {
         return userMapper.deleteByPrimaryKey(userNo);
     }
+    @Override
     public int insert(User record) {
         return userMapper.insert(record);
     }
+    @Override
     public User selectByNopwd(Integer userNo, String password) {
         return userMapper.selectByNopwd(userNo,password);
     }
+    @Override
     public int updateByPrimaryKeySelective(User record) {
         return userMapper.updateByPrimaryKeySelective(record);
     }
+    @Override
     public int updateByPrimaryKey(User record) {
         return userMapper.updateByPrimaryKeySelective(record);
     }
+    @Override
     public User selectByNo(Integer userNo) {
         return userMapper.selectByNo(userNo);
     }

@@ -61,10 +61,11 @@ public class UsersController {
         System.out.println(userno + ":" + password);
         User u = userServiceImpl.selectByNopwd(userno1, password);
         System.out.println(userno1 + ":" + password);
-        if (u != null)
-          return "redirect:/forget.jsp";
-        else
+        if (u != null) {
+            return "redirect:/stuMain.jsp";
+        } else {
             return "redirect:/loginpage.jsp";
+        }
     }
 
 
