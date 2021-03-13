@@ -20,6 +20,15 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="talentShow.jsp">人才浏览 <span class="sr-only">(current)</span></a>
                 </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="aboutus.jsp">关于我们 <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="aboutus.jsp">论坛 <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/test">测试 <span class="sr-only">(current)</span></a>
+                </li>
             </ul>
             <a class="btn btn-outline-success my-2 my-sm-0" href="loginpage.jsp">登录</a>
         </div>

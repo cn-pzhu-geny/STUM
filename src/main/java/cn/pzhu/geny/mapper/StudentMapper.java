@@ -17,4 +17,8 @@ public interface StudentMapper {
 
     int updateByPrimaryKey(Student record);
 
+    int selectCount();
+
+    List<Student> selectTopStudent(int top);
+
 }

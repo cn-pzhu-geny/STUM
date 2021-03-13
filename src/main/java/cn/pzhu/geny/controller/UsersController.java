@@ -3,7 +3,10 @@ package cn.pzhu.geny.controller;
 import cn.pzhu.geny.pojo.User;
 import cn.pzhu.geny.service.UserService;
 import org.apache.commons.io.FileUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
@@ -14,7 +17,7 @@ import java.util.UUID;
 
 @Controller
 public class UsersController {
-    @Resource
+    @Autowired
     private UserService userServiceImpl;
 
     @RequestMapping("register")

@@ -9,14 +9,23 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
     <!-- 扫描注解 -->
-    <context:component-scan base-package="cn.pzhu.geny.controller"></context:component-scan>
+    <context:component-scan base-package="cn.pzhu.geny.controller"/>
     <!-- 注解驱动 -->
-    <mvc:annotation-driven></mvc:annotation-driven>
+    <mvc:annotation-driven/>
 
-    <!-- 静态资源 -->
-    <!--  默认静态资源过滤静态资源  -->
+    <mvc:annotation-driven>
+        <mvc:message-converters register-defaults="true">
+            <!--      JSON字符集编码统一设置      -->
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <constructor-arg value="UTF-8"/>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <!--  默认静态资源过滤  -->
     <mvc:default-servlet-handler/>
+
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <property name="maxUploadSize" value="1024000"></property>
+        <property name="maxUploadSize" value="1024000"/>
     </bean>
 </beans>

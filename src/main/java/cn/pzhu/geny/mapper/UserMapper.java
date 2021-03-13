@@ -2,7 +2,6 @@ package cn.pzhu.geny.mapper;
 
 import cn.pzhu.geny.pojo.Student;
 import cn.pzhu.geny.pojo.User;
-import com.sun.xml.internal.txw2.output.DumpSerializer;
 import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {

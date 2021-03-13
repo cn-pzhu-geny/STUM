@@ -2,6 +2,7 @@ package cn.pzhu.geny.mapper;
 
 import cn.pzhu.geny.pojo.Score;
 
+
 public interface ScoreMapper {
     int deleteByPrimaryKey(Integer actId);
 

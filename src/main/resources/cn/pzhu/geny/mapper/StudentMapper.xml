@@ -8,16 +8,27 @@
     <result column="stu_sex" jdbcType="CHAR" property="stuSex" />
     <result column="stu_contact" jdbcType="VARCHAR" property="stuContact" />
     <result column="stu_class" jdbcType="VARCHAR" property="stuClass" />
+    <result column="stu_info" jdbcType="VARCHAR" property="stuInfo"/>
   </resultMap>
   <sql id="Base_Column_List">
-    stu_no, stu_id, stu_name, stu_sex, stu_contact, stu_class
+    stu_no, stu_id, stu_name, stu_sex, stu_contact, stu_class, stu_info
   </sql>
+
+  <select id="selectCount" resultType="int">
+    select count(*) from student
+  </select>
+
+  <select id="selectTopStudent" parameterType="int" resultMap="BaseResultMap">
+    select top(#{top}) <include refid="Base_Column_List"/> from student
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from student
     where stu_no = #{stuNo,jdbcType=INTEGER}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from student
     where stu_no = #{stuNo,jdbcType=INTEGER}
