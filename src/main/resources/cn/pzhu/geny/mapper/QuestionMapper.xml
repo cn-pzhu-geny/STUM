@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.pzhu.geny.mapper.QuestionMapper">
+  <resultMap id="BaseResultMap" type="cn.pzhu.geny.pojo.Question">
+    <id column="ques_id" jdbcType="INTEGER" property="quesId" />
+    <result column="ques_title" jdbcType="VARCHAR" property="quesTitle" />
+    <result column="ques_desc" jdbcType="VARCHAR" property="quesDesc" />
+    <result column="ques_create_time" jdbcType="TIMESTAMP" property="quesCreateTime" />
+    <result column="ques_create_user" jdbcType="VARCHAR" property="quesCreateUser" />
+    <result column="ques_type" jdbcType="VARCHAR" property="quesType" />
+    <result column="ques_pic" jdbcType="VARCHAR" property="quesPic" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ques_id, ques_title, ques_desc, ques_create_time, ques_create_user, ques_type,ques_pic
+  </sql>
+
+  <select id="selectAll"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from question
+  </select>
+
+  <select id="selQuestionByQid" parameterType="int" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from question where ques_id=#{qid}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from question
+    where ques_id = #{quesId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="ques_id" keyProperty="quesId" parameterType="cn.pzhu.geny.pojo.Question" useGeneratedKeys="true">
+    insert into question (ques_title, ques_desc, ques_create_time, 
+      ques_create_user, ques_type)
+    values (#{quesTitle,jdbcType=VARCHAR}, #{quesDesc,jdbcType=VARCHAR}, #{quesCreateTime,jdbcType=TIMESTAMP}, 
+      #{quesCreateUser,jdbcType=VARCHAR}, #{quesType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="ques_id" keyProperty="quesId" parameterType="cn.pzhu.geny.pojo.Question" useGeneratedKeys="true">
+    insert into question
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="quesTitle != null">
+        ques_title,
+      </if>
+      <if test="quesDesc != null">
+        ques_desc,
+      </if>
+      <if test="quesCreateTime != null">
+        ques_create_time,
+      </if>
+      <if test="quesCreateUser != null">
+        ques_create_user,
+      </if>
+      <if test="quesType != null">
+        ques_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="quesTitle != null">
+        #{quesTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="quesDesc != null">
+        #{quesDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="quesCreateTime != null">
+        #{quesCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="quesCreateUser != null">
+        #{quesCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="quesType != null">
+        #{quesType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.pzhu.geny.pojo.Question">
+    update question
+    <set>
+      <if test="quesTitle != null">
+        ques_title = #{quesTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="quesDesc != null">
+        ques_desc = #{quesDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="quesCreateTime != null">
+        ques_create_time = #{quesCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="quesCreateUser != null">
+        ques_create_user = #{quesCreateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="quesType != null">
+        ques_type = #{quesType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ques_id = #{quesId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.pzhu.geny.pojo.Question">
+    update question
+    set ques_title = #{quesTitle,jdbcType=VARCHAR},
+      ques_desc = #{quesDesc,jdbcType=VARCHAR},
+      ques_create_time = #{quesCreateTime,jdbcType=TIMESTAMP},
+      ques_create_user = #{quesCreateUser,jdbcType=VARCHAR},
+      ques_type = #{quesType,jdbcType=VARCHAR}
+    where ques_id = #{quesId,jdbcType=INTEGER}
+  </update>
+</mapper>
