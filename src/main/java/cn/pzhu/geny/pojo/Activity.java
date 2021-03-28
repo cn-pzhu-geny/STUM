@@ -1,8 +1,10 @@
 package cn.pzhu.geny.pojo;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
+import java.util.List;
 
 /**
  * activity
@@ -45,5 +47,6 @@ public class Activity implements Serializable {
      */
     private Integer actTeaNo;
 
+    private List<Score> scoreList;
     private static final long serialVersionUID = 1L;
 }

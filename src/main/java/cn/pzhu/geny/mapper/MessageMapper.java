@@ -2,6 +2,8 @@ package cn.pzhu.geny.mapper;
 
 import cn.pzhu.geny.pojo.Message;
 
+import java.util.List;
+
 public interface MessageMapper {
     int deleteByPrimaryKey(Integer messageId);
 
@@ -9,7 +11,7 @@ public interface MessageMapper {
 
     int insertSelective(Message record);
 
-    Message selectByPrimaryKey(Integer messageId);
+    List<Message> selectByPrimaryKey(Integer messageId);
 
     int updateByPrimaryKeySelective(Message record);
 

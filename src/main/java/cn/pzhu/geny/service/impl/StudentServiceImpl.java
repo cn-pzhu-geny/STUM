@@ -1,7 +1,7 @@
 package cn.pzhu.geny.service.impl;
 
 import cn.pzhu.geny.mapper.StudentMapper;
-import cn.pzhu.geny.mapper.UserMapper;
+import cn.pzhu.geny.pojo.Activity;
 import cn.pzhu.geny.pojo.Student;
 import cn.pzhu.geny.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,5 +17,20 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Student> selTopStudent(int top) {
         return studentMapper.selectTopStudent(top);
+    }
+
+    @Override
+    public List<Activity> getActList(int stuNo) {
+        return studentMapper.getActList(stuNo);
+    }
+
+    @Override
+    public int updStuInfo(Student student) {
+        return studentMapper.updStuInfo(student);
+    }
+
+    @Override
+    public Student selStudentByNo(int stuNo) {
+        return studentMapper.selectByPrimaryKey(stuNo);
     }
 }

@@ -1,9 +1,9 @@
 package cn.pzhu.geny.pojo;
 
-import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
 
+import java.io.Serializable;
+import java.util.Date;
 /**
  * message
  * @author 
@@ -34,6 +34,8 @@ public class Message implements Serializable {
      * 发送时间
      */
     private Date createTime;
+
+    private int qid;
 
     private static final long serialVersionUID = 1L;
 }

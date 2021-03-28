@@ -1,109 +1,138 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.pzhu.geny.mapper.StudentMapper">
-  <resultMap id="BaseResultMap" type="cn.pzhu.geny.pojo.Student">
-    <id column="stu_no" jdbcType="INTEGER" property="stuNo" />
-    <result column="stu_id" jdbcType="VARCHAR" property="stuId" />
-    <result column="stu_name" jdbcType="VARCHAR" property="stuName" />
-    <result column="stu_sex" jdbcType="CHAR" property="stuSex" />
-    <result column="stu_contact" jdbcType="VARCHAR" property="stuContact" />
-    <result column="stu_class" jdbcType="VARCHAR" property="stuClass" />
-    <result column="stu_info" jdbcType="VARCHAR" property="stuInfo"/>
-  </resultMap>
-  <sql id="Base_Column_List">
-    stu_no, stu_id, stu_name, stu_sex, stu_contact, stu_class, stu_info
-  </sql>
+    <resultMap id="BaseResultMap" type="cn.pzhu.geny.pojo.Student">
+        <id column="stu_no" jdbcType="INTEGER" property="stuNo"/>
+        <result column="stu_id" jdbcType="VARCHAR" property="stuId"/>
+        <result column="stu_name" jdbcType="VARCHAR" property="stuName"/>
+        <result column="stu_sex" jdbcType="CHAR" property="stuSex"/>
+        <result column="stu_contact" jdbcType="VARCHAR" property="stuContact"/>
+        <result column="stu_class" jdbcType="VARCHAR" property="stuClass"/>
+        <result column="stu_info" jdbcType="VARCHAR" property="stuInfo"/>
+        <result column="stu_photo" jdbcType="VARCHAR" property="stuPhoto"/>
+    </resultMap>
 
-  <select id="selectCount" resultType="int">
-    select count(*) from student
-  </select>
+    <resultMap id="actList" type="cn.pzhu.geny.pojo.Activity">
+        <id property="actId" column="act_id"/>
+        <result property="actName" column="act_name"/>
+        <result property="actDescr" column="act_descr"/>
+        <collection ofType="cn.pzhu.geny.pojo.Score" property="scoreList">
+            <id property="actId"  column="act_id"/>
+            <id property="userNo" column="user_no"/>
+            <result property="score" column="score"/>
+        </collection>
+    </resultMap>
 
-  <select id="selectTopStudent" parameterType="int" resultMap="BaseResultMap">
-    select top(#{top}) <include refid="Base_Column_List"/> from student
-  </select>
+    <select id="getActList" resultMap="actList" >
+        SELECT *
+        FROM activity, score
+        WHERE activity.act_id=score.act_id and score.user_no=#{stuNo}
+    </select>
 
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from student
-    where stu_no = #{stuNo,jdbcType=INTEGER}
-  </select>
+    <sql id="Base_Column_List">
+        stu_no, stu_id, stu_name, stu_sex, stu_contact, stu_class, stu_info,stu_photo
+    </sql>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from student
-    where stu_no = #{stuNo,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" keyColumn="stu_no" keyProperty="stuNo" parameterType="cn.pzhu.geny.pojo.Student" useGeneratedKeys="true">
-    insert into student (stu_no,stu_id, stu_name, stu_sex,
-      stu_contact, stu_class)
-    values (#{stuNo},#{stuId,jdbcType=VARCHAR}, #{stuName,jdbcType=VARCHAR}, #{stuSex,jdbcType=CHAR},
-      #{stuContact,jdbcType=VARCHAR}, #{stuClass,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" keyColumn="stu_no" keyProperty="stuNo" parameterType="cn.pzhu.geny.pojo.Student" useGeneratedKeys="true">
-    insert into student
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="stuId != null">
-        stu_id,
-      </if>
-      <if test="stuName != null">
-        stu_name,
-      </if>
-      <if test="stuSex != null">
-        stu_sex,
-      </if>
-      <if test="stuContact != null">
-        stu_contact,
-      </if>
-      <if test="stuClass != null">
-        stu_class,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="stuId != null">
-        #{stuId,jdbcType=VARCHAR},
-      </if>
-      <if test="stuName != null">
-        #{stuName,jdbcType=VARCHAR},
-      </if>
-      <if test="stuSex != null">
-        #{stuSex,jdbcType=CHAR},
-      </if>
-      <if test="stuContact != null">
-        #{stuContact,jdbcType=VARCHAR},
-      </if>
-      <if test="stuClass != null">
-        #{stuClass,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.pzhu.geny.pojo.Student">
-    update student
-    <set>
-      <if test="stuId != null">
-        stu_id = #{stuId,jdbcType=VARCHAR},
-      </if>
-      <if test="stuName != null">
-        stu_name = #{stuName,jdbcType=VARCHAR},
-      </if>
-      <if test="stuSex != null">
-        stu_sex = #{stuSex,jdbcType=CHAR},
-      </if>
-      <if test="stuContact != null">
-        stu_contact = #{stuContact,jdbcType=VARCHAR},
-      </if>
-      <if test="stuClass != null">
-        stu_class = #{stuClass,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where stu_no = #{stuNo,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="cn.pzhu.geny.pojo.Student">
-    update student
-    set stu_id = #{stuId,jdbcType=VARCHAR},
-      stu_name = #{stuName,jdbcType=VARCHAR},
-      stu_sex = #{stuSex,jdbcType=CHAR},
-      stu_contact = #{stuContact,jdbcType=VARCHAR},
-      stu_class = #{stuClass,jdbcType=VARCHAR}
-    where stu_no = #{stuNo,jdbcType=INTEGER}
-  </update>
+    <select id="selectCount" resultType="int">
+        select count(*)
+        from student
+    </select>
+
+    <update id="updStuInfo" parameterType="cn.pzhu.geny.pojo.Student">
+        update student set stu_info=#{student.stuInfo},stu_contact=#{student.stuContact} where stu_no=#{student.stuNo}
+    </update>
+
+    <select id="selectTopStudent" parameterType="int" resultMap="BaseResultMap">
+        select top(#{top})
+        <include refid="Base_Column_List"/>
+        from student
+    </select>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from student
+        where stu_no = #{stuNo,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from student
+        where stu_no = #{stuNo,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" keyColumn="stu_no" keyProperty="stuNo" parameterType="cn.pzhu.geny.pojo.Student"
+            useGeneratedKeys="true">
+        insert into student (stu_no, stu_id, stu_name, stu_sex,
+                             stu_contact, stu_class)
+        values (#{stuNo}, #{stuId,jdbcType=VARCHAR}, #{stuName,jdbcType=VARCHAR}, #{stuSex,jdbcType=CHAR},
+                #{stuContact,jdbcType=VARCHAR}, #{stuClass,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" keyColumn="stu_no" keyProperty="stuNo" parameterType="cn.pzhu.geny.pojo.Student"
+            useGeneratedKeys="true">
+        insert into student
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="stuId != null">
+                stu_id,
+            </if>
+            <if test="stuName != null">
+                stu_name,
+            </if>
+            <if test="stuSex != null">
+                stu_sex,
+            </if>
+            <if test="stuContact != null">
+                stu_contact,
+            </if>
+            <if test="stuClass != null">
+                stu_class,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="stuId != null">
+                #{stuId,jdbcType=VARCHAR},
+            </if>
+            <if test="stuName != null">
+                #{stuName,jdbcType=VARCHAR},
+            </if>
+            <if test="stuSex != null">
+                #{stuSex,jdbcType=CHAR},
+            </if>
+            <if test="stuContact != null">
+                #{stuContact,jdbcType=VARCHAR},
+            </if>
+            <if test="stuClass != null">
+                #{stuClass,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="cn.pzhu.geny.pojo.Student">
+        update student
+        <set>
+            <if test="stuId != null">
+                stu_id = #{stuId,jdbcType=VARCHAR},
+            </if>
+            <if test="stuName != null">
+                stu_name = #{stuName,jdbcType=VARCHAR},
+            </if>
+            <if test="stuSex != null">
+                stu_sex = #{stuSex,jdbcType=CHAR},
+            </if>
+            <if test="stuContact != null">
+                stu_contact = #{stuContact,jdbcType=VARCHAR},
+            </if>
+            <if test="stuClass != null">
+                stu_class = #{stuClass,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where stu_no = #{stuNo,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="cn.pzhu.geny.pojo.Student">
+        update student
+        set stu_id      = #{stuId,jdbcType=VARCHAR},
+            stu_name    = #{stuName,jdbcType=VARCHAR},
+            stu_sex     = #{stuSex,jdbcType=CHAR},
+            stu_contact = #{stuContact,jdbcType=VARCHAR},
+            stu_class   = #{stuClass,jdbcType=VARCHAR}
+        where stu_no = #{stuNo,jdbcType=INTEGER}
+    </update>
 </mapper>

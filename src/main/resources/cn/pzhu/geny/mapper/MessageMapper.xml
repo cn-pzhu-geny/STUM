@@ -7,15 +7,17 @@
     <result column="to_user_no" jdbcType="INTEGER" property="toUserNo" />
     <result column="message" jdbcType="VARCHAR" property="message" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="qid" jdbcType="INTEGER" property="qid" />
   </resultMap>
   <sql id="Base_Column_List">
-    message_id, user_no, to_user_no, message, create_time
+    message_id, user_no, to_user_no, message, create_time,qid
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from message
-    where message_id = #{messageId,jdbcType=INTEGER}
+    where qid = #{qid}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from message

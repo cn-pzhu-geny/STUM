@@ -4,19 +4,24 @@ import cn.pzhu.geny.pojo.User;
 import cn.pzhu.geny.service.UserService;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
-import javax.annotation.Resource;
+
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
 @Controller
 public class UsersController {
+    private final int ADMIN_PERMISSION=1;
+    private final int TEACHER_PERMISSION=2;
+    private final int STUDENT_PERMISSION=3;
+    private final int ENTERPRISE_PERMISSION=4;
+
     @Autowired
     private UserService userServiceImpl;
 
@@ -44,7 +49,7 @@ public class UsersController {
                 index = userServiceImpl.insert(user);
                 if (index > 0) {
                     System.out.println("注册成功");
-                    return "redirect:/loginpage.jsp";
+                    return "redirect:/newlogin.html";
                 } else {
                     System.out.println("注册失败");
                     return "redirect:/reg.jsp";
@@ -59,16 +64,41 @@ public class UsersController {
     }
 
     @RequestMapping("login")
-    public String login(String userno, String password) {
+    public String login(String userno, String password, HttpServletRequest req, HttpServletResponse resp) {
         int userno1 = Integer.parseInt(userno);
         System.out.println(userno + ":" + password);
         User u = userServiceImpl.selectByNopwd(userno1, password);
         System.out.println(userno1 + ":" + password);
         if (u != null) {
-            return "redirect:/stuMain.jsp";
-        } else {
-            return "redirect:/loginpage.jsp";
+            Cookie cookie1 = new Cookie("uid", String.valueOf(u.getUserNo()));
+            cookie1.setPath("STUM");
+            resp.addCookie(cookie1);
+            if (u.getPermission() == STUDENT_PERMISSION) {
+                Cookie cookie = new Cookie("status", String.valueOf(STUDENT_PERMISSION));
+                cookie.setPath("STUM");
+                resp.addCookie(cookie);
+                return "redirect:/index.html";
+            }
+            if (u.getPermission() == ADMIN_PERMISSION) {
+                Cookie cookie = new Cookie("status", String.valueOf(ADMIN_PERMISSION));
+                cookie.setPath("STUM");
+                resp.addCookie(cookie);
+                return "redirect:/stuMain.jsp";
+            }
+            if (u.getPermission() == ENTERPRISE_PERMISSION) {
+                Cookie cookie = new Cookie("status", String.valueOf(ENTERPRISE_PERMISSION));
+                cookie.setPath("STUM");
+                resp.addCookie(cookie);
+                return "redirect:/stuMain.jsp";
+            }
+            if (u.getPermission() == TEACHER_PERMISSION) {
+                Cookie cookie = new Cookie("status", String.valueOf(TEACHER_PERMISSION));
+                cookie.setPath("STUM");
+                resp.addCookie(cookie);
+                return "redirect:/stuMain.jsp";
+            }
         }
+        return "redirect:/newlogin.html";
     }
 
 
